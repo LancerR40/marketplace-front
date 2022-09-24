@@ -10,11 +10,11 @@ const colors = {
   secondary: "bg-gray-500 text-white hover:bg-gray-600",
 };
 
-const Button = ({ className, style, size = 'sm', color = 'primary', onClick, children }) => {
+const Button = ({ className, style, type='button', size = 'sm', color = 'primary', onClick, children }) => {
   const classes = classnames(defaultClasses, sizes[size], colors[color], className)
 
   return (
-    <button className={classes} style={style} onClick={onClick}>
+    <button className={classes} style={style} type={type} onClick={onClick}>
       {children}
     </button>
   )

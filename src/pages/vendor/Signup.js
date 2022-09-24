@@ -1,31 +1,141 @@
+import { useState } from 'react'
+
 import { H1, FormGroup, Label, Input, Button } from '../../components/ui'
 import { Link } from 'react-router-dom'
 
+const defaultState = {
+  email: {
+    value: '',
+    error: {
+      status: false,
+      message: ''
+    }
+  },
+  password: {
+    value: '',
+    error: {
+      status: false,
+      message: ''
+    }
+  },
+  repeatedPassword: {
+    value: '',
+    error: {
+      status: false,
+      message: ''
+    }
+  },
+}
+
+const inputValidation = (name, value, input, setInput) => {
+  setInput((state) => ({ ...state, [name]: { ...state[name], value, error: { ...state[name].error, status: false, message: '' } } }))
+  
+  if (name === 'email') {
+    if (!value) {
+      setInput((state) => ({ ...state, email: { ...state.email, error: { ...state.email.error, status: true, message: 'Campo de correo requerido' } } }))
+    }
+  
+    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value)) {
+      setInput((state) => ({ ...state, email: { ...state.email, error: { ...state.email.error, status: true, message: 'El correo es inválido' } } }))
+    }
+  }
+  
+  if (name === 'password' && (!value || value.length < 6)) {
+    setInput((state) => ({ ...state, password: { ...state.password, error: { ...state.password.error, status: true, message: 'La contraseña debe contener un mínimo de seis(6) caracteres' } } }))
+
+    if (input.repeatedPassword.value.length > 0 && (input.repeatedPassword.value !== value)) {
+      setInput((state) => ({ ...state, repeatedPassword: { ...state.repeatedPassword, error: { ...state.repeatedPassword.error, status: true, message: 'La contraseña debe coincidir' } } }))
+    }
+  }
+  
+  if (name === 'repeatedPassword' && value !== input.password.value) {
+    setInput((state) => ({ ...state, repeatedPassword: { ...state.repeatedPassword, error: { ...state.repeatedPassword.error, status: true, message: 'La contraseña debe coincidir' } } }))
+  }
+}
+
+const onSubmitValidation = (input, setInput) => {
+  const { email, password, repeatedPassword } = input
+  let anError = false
+
+  if (!email.value) {
+    setInput((state) => ({ ...state, email: { ...state.email, error: { ...state.email.error, status: true, message: 'Campo de correo requerido' } } }))
+    anError = true
+  }
+
+  if (!password.value) {
+    setInput((state) => ({ ...state, password: { ...state.password, error: { ...state.password.error, status: true, message: 'La contraseña debe contener un mínimo de seis(6) caracteres' } } }))
+    anError = true
+  }
+
+  if (!repeatedPassword.value) {
+    setInput((state) => ({ ...state, repeatedPassword: { ...state.repeatedPassword, error: { ...state.repeatedPassword.error, status: true, message: 'La contraseña debe coincidir' } } }))
+    anError = true
+  }
+
+  for (let key in input) {
+    if (input[key].error.status) {
+      anError = true
+      break
+    }
+  }
+
+  return anError ? false : true
+}
+
 const Signup = () => {
+  const [input, setInput] = useState(defaultState)
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (!onSubmitValidation(input, setInput)) {
+      return
+    }
+
+    alert('Todo esta nice')
+  }
+
+  const onChange = (e) => {
+    const { name, value } = e.target
+    inputValidation(name, value, input, setInput)
+  }
+
+  const anErrorEmail               = { status: input.email.error.status,            message: input.email.error.message    }
+  const anErrorPassword            = { status: input.password.error.status,         message: input.password.error.message }
+  const anErrorRepeatedPassword    = { status: input.repeatedPassword.error.status, message: input.repeatedPassword.error.message }
+  const emailErrorStyle            = anErrorEmail.status            ? { borderColor: 'red' } : null
+  const passwordErrorStyle         = anErrorPassword.status         ? { borderColor: 'red' } : null
+  const repeatedPasswordErrorStyle = anErrorRepeatedPassword.status ? { borderColor: 'red' } : null
+
   return (
     <div className="flex justify-center items-center overflow-auto h-screen bg-gray-100" style={{ minHeight: 640 }}>
-      <form className="py-8 px-4 sm:px-8 w-full max-w-md rounded shadow-sm bg-white">
+      <form className="py-8 px-4 sm:px-8 w-full max-w-md rounded shadow-sm bg-white" onSubmit={onSubmit}>
         <H1 className="text-center uppercase text-gray-700">Crear una cuenta</H1>
 
         <div className='mt-8'>
           <FormGroup>
             <Label>Correo:</Label>
-            
-            <Input type='text' name='email' placeholder='example@domain.com' />
+            <Input type='text' name='email' placeholder='example@domain.com' style={emailErrorStyle} onChange={onChange} />
+
+            {anErrorEmail.status && <span className='block mt-2 text-xs text-red-500'>{anErrorEmail.message}</span>}
           </FormGroup>
 
           <FormGroup>
             <Label>Contraseña:</Label>
-            <Input type='password' name='password' placeholder='********' />
+            <Input type='password' name='password' placeholder='********' style={passwordErrorStyle} onChange={onChange} />
+
+            {anErrorPassword.status && <span className='block mt-2 text-xs text-red-500'>{anErrorPassword.message}</span>}
           </FormGroup>
 
           <FormGroup>
             <Label>Confirmar contraseña:</Label>
-            <Input type='password' name='passwordConfirm' placeholder='********' />
+            <Input type='password' name='repeatedPassword' placeholder='********' style={repeatedPasswordErrorStyle} onChange={onChange} />
+
+            {anErrorRepeatedPassword.status && <span className='block mt-2 text-xs text-red-500'>{anErrorRepeatedPassword.message}</span>}
           </FormGroup>
 
           <div className='text-center'>
-            <Button className='w-fit px-8 py-3 uppercase'>Registrarse</Button>
+            <Button className='w-fit px-8 py-3 uppercase' type='submit'>Registrarse</Button>
           </div>
         </div>
 
