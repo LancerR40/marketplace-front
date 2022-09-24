@@ -44,8 +44,48 @@ code {
   min-width: 300px;
 }
 
+.vendor-not-auth-img {
+  width: 100%;
+  height: 300px;
+}
+
+.vendor-not-auth-content {
+  max-width: 320px;
+}
+
+.vendor-not-auth-title {
+  font-size: 42px;
+  line-height: 50px;
+}
+
+.vendor-not-auth-text {
+  letter-spacing: 1px;
+}
+
+.customModal {
+  padding: 0;
+  border-radius: 3px;
+}
+
 @media screen and (min-width: 1024px) {
   .dashboard {
     min-height: calc(100vh - 60px);
+  }
+
+  .vendor-not-auth {
+    width: calc(100% - 300px);
+  }
+
+  .vendor-not-auth-img {
+    width: 500px;
+    height: 300px;
+  }
+
+  .vendor-not-auth-title span, .vendor-not-auth-text span {
+    display: block;
+  }
+
+  .vendor-not-auth-content {
+    min-width: 360px;
   }
 }
