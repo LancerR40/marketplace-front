@@ -1,4 +1,5 @@
 import { H1, FormGroup, Label, Input, Button } from '../../components/ui'
+import { Link } from 'react-router-dom'
 
 const Signup = () => {
   return (
@@ -8,9 +9,9 @@ const Signup = () => {
 
         <div className='mt-8'>
           <FormGroup>
-            <Label>Email:</Label>
+            <Label>Correo:</Label>
             
-            <Input type='text' name='email' placeholder='Ingresa un email...' />
+            <Input type='text' name='email' placeholder='example@domain.com' />
           </FormGroup>
 
           <FormGroup>
@@ -27,6 +28,8 @@ const Signup = () => {
             <Button className='w-fit px-8 py-3 uppercase'>Registrarse</Button>
           </div>
         </div>
+
+        <Link className='block underline mt-4 text-center text-lg text-blue-500' to='/'>Iniciar sesión</Link>
       </form>
     </div>
   )
