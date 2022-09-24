@@ -1,11 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -20,4 +22,30 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.mobile-nav {
+  top: 60px;
+  left: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s all ease-in-out;
+}
+
+.mobile-nav.active {
+  height: calc(100vh - 60px);
+  padding: 16px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar {
+  min-width: 300px;
+}
+
+@media screen and (min-width: 1024px) {
+  .dashboard {
+    min-height: calc(100vh - 60px);
+  }
 }
