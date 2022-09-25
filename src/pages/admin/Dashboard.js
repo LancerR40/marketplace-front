@@ -75,6 +75,12 @@ const Dashboard = () => {
     document.getElementById(`checkbox-${id}`).checked = false
   }
 
+  const removeAllItemsFromFilter = () => {
+    for (let i = 0; i < vendorIds.length; i++) {
+      removeItemFromFilter(vendorIds[i])
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -85,7 +91,11 @@ const Dashboard = () => {
 
       <div className='p-3 lg:flex'>
         <div className='admin-filter-box border-b pb-5'>
-          <span className='text-gray-700 text-xl'>Filtros</span>
+          <div className='flex justify-between items-center pr-3'>
+            <span className='text-gray-700 text-xl'>Filtros</span>
+            <span className='text-red-500 underline cursor-pointer' onClick={removeAllItemsFromFilter}>Borrar</span>
+          </div>
+          
           <div className='mt-3 flex gap-5 flex-wrap'>
             {vendors.map(({ vendorId, name }) => (
               <div key={vendorId} className='flex items-center gap-2'>
