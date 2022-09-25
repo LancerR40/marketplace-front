@@ -121,7 +121,7 @@ const Signup = () => {
 
     if (!response.success) {
       const { message, field } = response.error
-      return setInput((state) => ({ ...state, [field]: { ...state[field], error: { ...state[field].error, status: true, message: response.error.message } } }))
+      return setInput((state) => ({ ...state, [field]: { ...state[field], error: { ...state[field].error, status: true, message } } }))
     }
 
     setInput(defaultState)
