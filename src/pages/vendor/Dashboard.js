@@ -19,7 +19,7 @@ const Dashboard = () => {
       <div className='dashboard lg:flex'>
         <Navigation section={section} />
 
-        {currentSection === NAV_LINKS[3] && <VendorNotAuth />}
+        {currentSection === NAV_LINKS[3].toLocaleLowerCase() && <VendorNotAuth />}
       </div>
     </>
   )
