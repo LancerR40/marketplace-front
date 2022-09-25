@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../../components/header/Header'
 import { H2 } from '../../components/ui'
 import { FaUserCircle } from 'react-icons/fa'
+import { MdCancel } from 'react-icons/md'
 
 import image from '../../assets/image-1.jpg'
 
@@ -69,6 +70,11 @@ const Dashboard = () => {
     return setUserAuth({ auth: false, role: null, name: null })
   }
 
+  const removeItemFromFilter = (id) => {
+    setVendorIds((state) => state.filter(item => item != id))
+    document.getElementById(`checkbox-${id}`).checked = false
+  }
+
   return (
     <div>
       <Header />
@@ -83,7 +89,7 @@ const Dashboard = () => {
           <div className='mt-3 flex gap-5 flex-wrap'>
             {vendors.map(({ vendorId, name }) => (
               <div key={vendorId} className='flex items-center gap-2'>
-                <input type="checkbox" value={vendorId} onChange={onChange} />
+                <input id={`checkbox-${vendorId}`} type="checkbox" value={vendorId} onChange={onChange} />
                 <span className='text-gray-700 text-sm'>{name}</span>
               </div>
             ))}
@@ -93,26 +99,39 @@ const Dashboard = () => {
           <span className='block mt-5 text-blue-500 underline cursor-pointer' onClick={logout}>Cerrar sesión</span>
         </div>
             
-        <div className='py-4 flex items-center flex-col gap-5 lg:flex-row lg:flex-wrap lg:gap-10'>
-          {products.map((product) => (
-            <div key={product.productId} className="border border-gray-200 rounded bg-gray-50 transition-all hover:border-2 hover:border-blue-500 hover:-translate-y-1">
-              <div>
-                <img src={image} className='object-fit' style={{ width: 250, height: 150 }} />
-              </div>
-
-              <div className='p-3 text-gray-700 text-center'>
-                <span className='block text-xl font-semibold'>{product.productName}</span>
-                <span className='block my-2 text-lg'>{product.sku}</span>
-                <span className='block text-lg'>${product.price}</span>
-
-                <div className='mt-3 flex justify-end items-center gap-2'>
-                  <FaUserCircle className='text-3xl text-gray-700' />
-                  <span className='text-sm'>{product.vendorName}</span>
+        <div>
+          <div className='hidden lg:flex gap-4 py-5'>
+              {vendorIds.map((id) => {
+                const { name } = vendors.find(({ vendorId }) => vendorId == id)
+                return (
+                  <div key={id} className='p-5 bg-gray-100 rounded text-sm text-gray-700 flex flex-wrap items-center gap-2' onClick={() => removeItemFromFilter(id)}>
+                    {name}
+                    <MdCancel className='text-red-500 text-xl cursor-pointer shadow' />
+                  </div>
+                )
+              })}
+          </div>
+          <div className='py-4 flex items-center flex-col gap-5 lg:flex-row lg:flex-wrap lg:gap-10'>
+            {products.map((product) => (
+              <div key={product.productId} className="border border-gray-200 rounded bg-gray-50 transition-all hover:border-2 hover:border-blue-500 hover:-translate-y-1">
+                <div>
+                  <img src={image} className='object-fit' style={{ width: 250, height: 150 }} />
                 </div>
-              </div>
 
-            </div>
-          ))}
+                <div className='p-3 text-gray-700 text-center'>
+                  <span className='block text-xl font-semibold'>{product.productName}</span>
+                  <span className='block my-2 text-lg'>{product.sku}</span>
+                  <span className='block text-lg'>${product.price}</span>
+
+                  <div className='mt-3 flex justify-end items-center gap-2'>
+                    <FaUserCircle className='text-3xl text-gray-700' />
+                    <span className='text-sm'>{product.vendorName}</span>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
