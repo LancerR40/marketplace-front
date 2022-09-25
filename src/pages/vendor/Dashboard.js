@@ -4,6 +4,7 @@ import Header from '../../components/header/Header'
 import useScreen from '../../hooks/useScreen'
 
 import VendorNotAuth from '../../components/vendor/NotAuth'
+import Products from '../../components/vendor/Products'
 
 const NAV_LINKS = ['Dashboard', 'Contizaciones', 'Ordenes', 'Inventario']
 
@@ -19,7 +20,7 @@ const Dashboard = () => {
       <div className='dashboard lg:flex'>
         <Navigation section={section} />
 
-        {currentSection === NAV_LINKS[3].toLocaleLowerCase() && <VendorNotAuth />}
+        {currentSection.toLocaleLowerCase() === NAV_LINKS[3].toLocaleLowerCase() && <VendorNotAuth />}
       </div>
     </>
   )
