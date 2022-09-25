@@ -1,15 +1,32 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useAuthContext } from './context/Auth'
+
 import VendorSignup    from './pages/vendor/Signup'
 import VendorLogin     from './pages/vendor/Login'
 import VendorDashboard from './pages/vendor/Dashboard'
 
 function App() {
+  const { userAuth: { auth, role } } = useAuthContext()
   return (
     <Router>
       <Routes>
-        <Route path='/vendor'        element={<VendorDashboard />} />
-        <Route path='/vendor/signup' element={<VendorSignup    />} />
-        <Route path='/vendor/login'  element={<VendorLogin     />} />
+        {auth && role === 'vendor' && (
+          <>
+            <Route path='/vendor' element={<VendorDashboard />} />
+            <Route path='*'       element={<VendorDashboard />} />
+          </>
+        )}
+
+        {!auth && !role && (
+          <>
+            <Route path='/vendor' element={<VendorDashboard />} />
+            <Route path='/vendor/signup' element={<VendorSignup    />} />
+            <Route path='/vendor/login'  element={<VendorLogin     />} />
+          </>
+        )}
+
+        
+        
       </Routes>
     </Router>
   );

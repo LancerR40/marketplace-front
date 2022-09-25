@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     userData()
-  }, [userAuth])
+  }, [userAuth.auth])
 
   const checkAuth = async () => {
     const response = await checkAuthAPI()
