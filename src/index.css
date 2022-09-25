@@ -88,4 +88,8 @@ code {
   .vendor-not-auth-content {
     min-width: 360px;
   }
+
+  .admin-filter-box {
+    min-width: 250px;
+  }
 }

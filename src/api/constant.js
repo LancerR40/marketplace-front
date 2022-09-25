@@ -7,3 +7,6 @@ export const USER_DATA     = `${BASE_URL}/auth/data`
 
 export const VENDOR_SIGNUP   = `${BASE_URL}/vendor/signup`
 export const VENDOR_PRODUCTS = `${BASE_URL}/vendor/products`
+
+export const GET_VENDORS            = `${BASE_URL}/admin/vendors`
+export const PRODUCTS_BY_VENDOR_IDs = `${BASE_URL}/admin/products-by-vendors`

@@ -94,7 +94,7 @@ const Login = () => {
     }
 
     const { auth, role, token } = response.data
-    navigate("/");
+    navigate("/admin");
     setUserAuth((state) => ({ ...state, auth, role }))
     
     localStorage.setItem("token", token);
