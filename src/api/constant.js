@@ -4,4 +4,5 @@ export const CHECK_AUTH    = `${BASE_URL}/auth`
 export const VENDOR_LOGIN  = `${BASE_URL}/auth/vendor/login`
 export const USER_DATA     = `${BASE_URL}/auth/data`
 
-export const VENDOR_SIGNUP = `${BASE_URL}/vendor/signup`
+export const VENDOR_SIGNUP   = `${BASE_URL}/vendor/signup`
+export const VENDOR_PRODUCTS = `${BASE_URL}/vendor/products`
