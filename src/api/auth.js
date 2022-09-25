@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CHECK_AUTH, VENDOR_LOGIN, USER_DATA } from './constant'
+import { CHECK_AUTH, VENDOR_LOGIN, ADMIN_LOGIN, USER_DATA } from './constant'
 
 export const checkAuthAPI = async () => {
   const token = localStorage.getItem('token') || ''
@@ -30,6 +30,15 @@ export const userDataAPI = async () => {
 export const vendorLoginAPI = async (data) => {
   try {
     const request = await axios.post(VENDOR_LOGIN, data)
+    return request.data
+  } catch (error) {
+    return false
+  } 
+}
+
+export const adminLoginAPI = async (data) => {
+  try {
+    const request = await axios.post(ADMIN_LOGIN, data)
     return request.data
   } catch (error) {
     return false
