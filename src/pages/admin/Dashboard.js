@@ -4,6 +4,7 @@ import { useAuthContext } from '../../context/Auth'
 import { useNavigate } from 'react-router-dom'
 
 import Header from '../../components/header/Header'
+import ProductCard from '../../components/product/Card'
 import { H2 } from '../../components/ui'
 import { FaUserCircle } from 'react-icons/fa'
 import { MdCancel } from 'react-icons/md'
@@ -122,24 +123,8 @@ const Dashboard = () => {
               })}
           </div>
           <div className='py-4 flex items-center flex-col gap-5 lg:flex-row lg:flex-wrap lg:gap-10'>
-            {products.map((product) => (
-              <div key={product.productId} className="border border-gray-200 rounded bg-gray-50 transition-all hover:border-2 hover:border-blue-500 hover:-translate-y-1">
-                <div>
-                  <img src={image} className='object-fit' style={{ width: 250, height: 150 }} />
-                </div>
-
-                <div className='p-3 text-gray-700 text-center'>
-                  <span className='block text-xl font-semibold'>{product.productName}</span>
-                  <span className='block my-2 text-lg'>{product.sku}</span>
-                  <span className='block text-lg'>${product.price}</span>
-
-                  <div className='mt-3 flex justify-end items-center gap-2'>
-                    <FaUserCircle className='text-3xl text-gray-700' />
-                    <span className='text-sm'>{product.vendorName}</span>
-                  </div>
-                </div>
-
-              </div>
+            {products.map(({ productId, productName, sku, price, vendorName }) => (
+              <ProductCard key={productId} {...{ productName, sku, price, vendorName }}  />
             ))}
           </div>
         </div>
