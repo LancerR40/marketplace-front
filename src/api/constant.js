@@ -4,7 +4,7 @@ const isLocalEnvironment = String(window.location.href).includes('localhost');
 if (isLocalEnvironment) {
   BASE_URL = 'http://localhost:4000/api/v1';
 } else {
-  BASE_URL = ''
+  BASE_URL = 'https://marketplace-server-1.herokuapp.com/api/v1'
 }
 
 export const CHECK_AUTH    = `${BASE_URL}/auth`
