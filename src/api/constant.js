@@ -1,4 +1,11 @@
-const BASE_URL = 'http://localhost:4000/api/v1'
+let BASE_URL = null
+const isLocalEnvironment = String(window.location.href).includes('localhost');
+
+if (isLocalEnvironment) {
+  BASE_URL = 'http://localhost:4000/api/v1';
+} else {
+  BASE_URL = ''
+}
 
 export const CHECK_AUTH    = `${BASE_URL}/auth`
 export const VENDOR_LOGIN  = `${BASE_URL}/auth/vendor/login`
