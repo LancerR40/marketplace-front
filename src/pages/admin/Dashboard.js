@@ -24,7 +24,7 @@ const Dashboard = () => {
   const [maxNum, setMaxNum] = useState(5)
   const [minNum, setMinNum] = useState(0)
   const maxOfVendors = vendors.length
-  const remainingVendors = maxOfVendors - maxNum
+  const remainingVendors = maxOfVendors - maxNum < 1 ? 0 : maxOfVendors - maxNum
 
   useEffect(() => {
     getVendors()
@@ -39,7 +39,7 @@ const Dashboard = () => {
       return
     }
 
-    setMaxNum((state) => state + remainingVendors)
+    setMaxNum((state) => state + (remainingVendors > 5 ? 5 : remainingVendors))
   }
 
   const productByVendorIds = async () => {
@@ -121,7 +121,7 @@ const Dashboard = () => {
            
           </div>
           <div className='text-right'>
-            <span className='block mt-5 text-blue-500 underline cursor-pointer pr-5' onClick={showMoreVendors}>Ver más({remainingVendors})</span>
+            <span className='block mt-5 text-blue-500 cursor-pointer pr-5' onClick={showMoreVendors}>Ver más({remainingVendors})</span>
           </div>
           <span className='block mt-5 text-blue-500 underline cursor-pointer' onClick={logout}>Cerrar sesión</span>
         </div>
