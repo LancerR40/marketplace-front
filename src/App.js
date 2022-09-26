@@ -8,6 +8,8 @@ import VendorDashboard from './pages/vendor/Dashboard'
 import AdminLogin      from './pages/admin/Login'
 import AdminDashboard  from './pages/admin/Dashboard'
 
+import BuyerDashboard from './pages/buyer/Dashboard'
+
 function App() {
   const { userAuth: { auth, role } } = useAuthContext()
   return (
@@ -29,6 +31,7 @@ function App() {
 
         {!auth && !role && (
           <>
+            <Route path='/buyer'         element={<BuyerDashboard  />} />
             <Route path='/vendor'        element={<VendorDashboard />} />
             <Route path='/vendor/signup' element={<VendorSignup    />} />
             <Route path='/vendor/login'  element={<VendorLogin     />} />

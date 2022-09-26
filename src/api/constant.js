@@ -10,3 +10,5 @@ export const VENDOR_PRODUCTS = `${BASE_URL}/vendor/products`
 
 export const GET_VENDORS            = `${BASE_URL}/admin/vendors`
 export const PRODUCTS_BY_VENDOR_IDs = `${BASE_URL}/admin/products-by-vendors`
+
+export const BUYER_GET_PRODUCTS = `${BASE_URL}/buyer/products`
