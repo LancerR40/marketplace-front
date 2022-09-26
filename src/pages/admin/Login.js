@@ -136,6 +136,11 @@ const Login = () => {
           <div className='text-center'>
             <Button className='w-fit px-8 py-3 uppercase' type='submit'>Continuar</Button>
           </div>
+
+          <div className='mt-5 text-gray-700 text-sm text-center'>
+            Correo: ttruckr1@hotmail.com<br/>
+            Contraseña: 01071998
+          </div>
         </div>
       </form>
     </div>
