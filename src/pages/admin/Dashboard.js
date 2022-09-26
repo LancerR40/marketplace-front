@@ -17,8 +17,14 @@ const Dashboard = () => {
 
   const [vendors, setVendors] = useState([])
   const [vendorIds, setVendorIds] = useState([])
-
+  
   const [products, setProducts] = useState([])
+
+  // show more vendors logic
+  const [maxNum, setMaxNum] = useState(5)
+  const [minNum, setMinNum] = useState(0)
+  const maxOfVendors = vendors.length
+  const remainingVendors = maxOfVendors - maxNum
 
   useEffect(() => {
     getVendors()
@@ -27,6 +33,14 @@ const Dashboard = () => {
   useEffect(() => {
     productByVendorIds()
   }, [vendorIds])
+
+  const showMoreVendors = () => {
+    if (remainingVendors === 0) {
+      return
+    }
+
+    setMaxNum((state) => state + remainingVendors)
+  }
 
   const productByVendorIds = async () => {
     const data = { vendors: vendorIds }
@@ -94,11 +108,11 @@ const Dashboard = () => {
         <div className='admin-filter-box border-b pb-5'>
           <div className='flex justify-between items-center pr-3'>
             <span className='text-gray-700 text-xl'>Filtros</span>
-            <span className='text-red-500 underline cursor-pointer' onClick={removeAllItemsFromFilter}>Borrar</span>
+            <span className='text-red-500 underline cursor-pointer pr-5' onClick={removeAllItemsFromFilter}>Borrar</span>
           </div>
           
-          <div className='mt-3 flex gap-5 flex-wrap'>
-            {vendors.map(({ vendorId, name }) => (
+          <div className='mt-3 flex gap-5 flex-wrap lg:flex-col'>
+            {vendors.slice(minNum, maxNum).map(({ vendorId, name }) => (
               <div key={vendorId} className='flex items-center gap-2'>
                 <input id={`checkbox-${vendorId}`} type="checkbox" value={vendorId} onChange={onChange} />
                 <span className='text-gray-700 text-sm'>{name}</span>
@@ -106,7 +120,9 @@ const Dashboard = () => {
             ))}
            
           </div>
-
+          <div className='text-right'>
+            <span className='block mt-5 text-blue-500 underline cursor-pointer pr-5' onClick={showMoreVendors}>Ver más({remainingVendors})</span>
+          </div>
           <span className='block mt-5 text-blue-500 underline cursor-pointer' onClick={logout}>Cerrar sesión</span>
         </div>
             
