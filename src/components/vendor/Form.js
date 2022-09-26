@@ -156,28 +156,28 @@ const Form = ({ setProduct }) => {
         <div className='mt-2'>
           <FormGroup>
             <Label>Nombre:</Label>
-            <Input type='text' name='name' placeholder='Ingresa un nombre de producto...' style={nameErrorStyle} onChange={onChange} />
+            <Input type='text' name='name' placeholder='Ingresa un nombre de producto...' style={nameErrorStyle} value={input.name.value} onChange={onChange} />
 
             {anErrorName.status && <span className='block mt-2 text-xs text-red-500'>{anErrorName.message}</span>}
           </FormGroup>
 
           <FormGroup>
             <Label>SKU:</Label>
-            <Input type='text' name='sku' placeholder='Ingresa código SKU de producto...' style={skuErrorStyle} onChange={onChange} />
+            <Input type='text' name='sku' placeholder='Ingresa código SKU de producto...' style={skuErrorStyle} value={input.sku.value} onChange={onChange} />
 
             {anErrorSKU.status && <span className='block mt-2 text-xs text-red-500'>{anErrorSKU.message}</span>}
           </FormGroup>
 
           <FormGroup>
             <Label>Cantidad:</Label>
-            <Input type='number' name='quantity' placeholder='Ingersa la cantidad del producto...' style={quantityErrorStyle} onChange={onChange} />
+            <Input type='number' name='quantity' placeholder='Ingersa la cantidad del producto...' style={quantityErrorStyle} value={input.quantity.value} onChange={onChange} />
 
             {anErrorQuantity.status && <span className='block mt-2 text-xs text-red-500'>{anErrorQuantity.message}</span>}
           </FormGroup>
 
           <FormGroup>
             <Label>Precio:</Label>
-            <Input type='number' name='price' placeholder='Ingresa el precio del producto...' style={priceErrorStyle} onChange={onChange} />
+            <Input type='number' name='price' placeholder='Ingresa el precio del producto...' style={priceErrorStyle} value={input.price.value} onChange={onChange} />
 
             {anErrorPrice.status && <span className='block mt-2 text-xs text-red-500'>{anErrorPrice.message}</span>}
           </FormGroup>
