@@ -39,6 +39,7 @@ function App() {
             <Route path='/vendor/signup' element={<VendorSignup    />} />
             <Route path='/vendor/login'  element={<VendorLogin     />} />
             <Route path='/admin/login'   element={<AdminLogin      />} />
+            <Route path='*'              element={<Home            />} />
           </>
         )}
 
