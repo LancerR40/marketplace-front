@@ -128,6 +128,7 @@ const Form = ({ setProduct }) => {
     }
 
     setProduct(response.data.product)
+    setInput(defaultState)
     notify('success', 'Producto registrado')
   }
 
