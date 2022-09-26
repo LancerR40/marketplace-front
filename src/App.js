@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useAuthContext } from './context/Auth'
 
+import Home from './pages/Home'
+
 import VendorSignup    from './pages/vendor/Signup'
 import VendorLogin     from './pages/vendor/Login'
 import VendorDashboard from './pages/vendor/Dashboard'
@@ -31,6 +33,7 @@ function App() {
 
         {!auth && !role && (
           <>
+            <Route path='/'              element={<Home            />} />
             <Route path='/buyer'         element={<BuyerDashboard  />} />
             <Route path='/vendor'        element={<VendorDashboard />} />
             <Route path='/vendor/signup' element={<VendorSignup    />} />
